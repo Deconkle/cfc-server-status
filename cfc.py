@@ -27,8 +27,8 @@ def get_player_info():
 
 def format_player_info(info):
     players = [v for v in info['status']['players']]
-    pvpinfo = info['pvpstatus']
-    server = (info['status']['ip'],int(info['status']['port']))
+    pvpinfo = info['pvpstatus'] 
+    server = (info['status']['ip'],int(info['status']['port'])) # incase cfc changes ip.. i guess? (instead of hardcoded ip)
     a2s = get_a2s_info(server) or None
     
     for ply in players:
