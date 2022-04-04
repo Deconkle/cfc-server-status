@@ -4,7 +4,6 @@ from steam import game_servers as gs # so we can make A2S requests
 
 url = 'https://nanny.cfcservers.org/cfc3-status'
 """ example:
-There is currently 12 players connected.
 POLY (STEAM_0:1:99999999)
     Score: 999
     in PVP: yes
@@ -35,7 +34,7 @@ def format_player_info(info):
     server = (info['status']['ip'],int(info['status']['port'])) # incase cfc changes ip.. i guess? (instead of hardcoded ip)
     a2s = get_a2s_info(server) or None
     
-    print("There is currently "+str(len(players))+" players connected.")
+    #print("There is currently "+str(len(players))+" players connected.") if there's one player it'll look stupid like "there is currently one players connected" and I can't deal with that internally (using player(s) is stupid)
     for ply in players:
         connecting = ""
         score = ""
