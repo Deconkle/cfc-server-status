@@ -8,4 +8,4 @@ WIP (but functional) script to display status of cfcservers garry's mod build/ki
 
 ## still error?
 
-Please let me know @Decline#6561 or with an issue
+Please let me know @Decline#6561 with any issues
