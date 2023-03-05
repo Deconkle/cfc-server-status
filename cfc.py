@@ -23,12 +23,12 @@ def get_player_info():
     #error handling is for loosers. jk tho if this is down we're screwed
 
 def format_player_info(info):
-    players = [v for v in info['status']['players']]
+    status = info['status']
+    players = [player for player in status['players']]
     pvpinfo = info['pvpstatus'] 
-    server = (info['status']['ip'],int(info['status']['port'])) # incase cfc changes ip.. i guess? (instead of hardcoded ip)
+    server = (status['ip'],int(status['port'])) # this will be accurate, even if if you change `url` to the darkrp, TTT, dev server, etc.
     a2s = get_a2s_info(server) or None
     
-    #print("There is currently "+str(len(players))+" players connected.") if there's one player it'll look stupid like "there is currently one players connected" and I can't deal with that internally (using player(s) is stupid)
     for ply in players:
         connecting = ""
         score = ""
@@ -38,14 +38,21 @@ def format_player_info(info):
 
         if ply['state'] == "spawning":
             connecting = " [SPAWNING] "
-
         else: # If they're spawning, their pvp status doesn't exist and nor does their name in the a2s record
             if pvpinfo[steamid]:
                 in_pvp = " | in PVP"
             if a2s:
-                sid = "("+steamid+")"
                 score = " | Score: "+str(a2s[ply['name']])
 
-        print(name+score+in_pvp+" | "+ply['time_connected']+connecting+"\n"+sid+"\n")
+        print(name+\
+              in_pvp+\
+              score+\
+              " | "+ply['time_connected']+\
+              connecting+\
+              "\n"+steamid+\
+              "\n"
+              )
+    # [CFC] Build/Kill: 8/32 playing on gm_bigcity_improved_lite
+    print(status['hostname']+": "+status['player_count']+"/"+status['max_player_count'] + " playing on "+status['map'])
 
 format_player_info(get_player_info())
